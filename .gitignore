@@ -1,0 +1,18 @@
+.idea
+.vs
+**/obj
+**/bin
+*.user
+.DS_Store
+**/localstack
+
+/packages/
+riderModule.iml
+/_ReSharper.Caches/
+
+# Terraform directories
+**/.terraform/*
+aws/terraform/.terraform.lock.hcl
+
+helm/**/charts/*
+**/wwwroot/swagger
