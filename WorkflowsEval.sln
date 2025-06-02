@@ -1,0 +1,28 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WorkflowEval.ApiService", "src\WorkflowEval.ApiService\WorkflowEval.ApiService.csproj", "{01DCC99B-965B-44E7-85F1-37576B0FE304}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WorkflowEval.AppHost", "src\WorkflowEval.AppHost\WorkflowEval.AppHost.csproj", "{B538947A-2C80-4376-B575-6184378741F4}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WorkflowEval.ServiceDefaults", "src\WorkflowEval.ServiceDefaults\WorkflowEval.ServiceDefaults.csproj", "{3F2A3165-2935-445A-8844-30A045E13A65}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{01DCC99B-965B-44E7-85F1-37576B0FE304}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{01DCC99B-965B-44E7-85F1-37576B0FE304}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{01DCC99B-965B-44E7-85F1-37576B0FE304}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{01DCC99B-965B-44E7-85F1-37576B0FE304}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B538947A-2C80-4376-B575-6184378741F4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B538947A-2C80-4376-B575-6184378741F4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B538947A-2C80-4376-B575-6184378741F4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B538947A-2C80-4376-B575-6184378741F4}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3F2A3165-2935-445A-8844-30A045E13A65}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3F2A3165-2935-445A-8844-30A045E13A65}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3F2A3165-2935-445A-8844-30A045E13A65}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3F2A3165-2935-445A-8844-30A045E13A65}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+EndGlobal
