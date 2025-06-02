@@ -18,7 +18,7 @@ public static class ResourceBuilderExtensions
     {
         return resource.WithCommand(
             "swagger-ui-docs",
-            "SwaggerUI",
+            "Swagger UI",
             async _ =>
             {
                 try
