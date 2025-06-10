@@ -1,4 +1,5 @@
 using System.Diagnostics;
+using System.Net.Sockets;
 
 namespace WorkflowEval.AppHost.Extensions;
 
@@ -13,6 +14,26 @@ public static class ResourceBuilderExtensions
             .WithEnvironment("SERVICES", "sqs,sns");
     }
     
+    public static IResourceBuilder<ContainerResource> AddTemporalCluster(this IDistributedApplicationBuilder builder,
+        IResourceBuilder<PostgresDatabaseResource> postgresDb)
+    {
+        return builder
+            .AddContainer("temporal", "temporalio/admin-tools:latest")
+            .WithEndpoint(7233, 7233, name: "server")
+            .AsHttp2Service()
+            .WithEntrypoint("temporal")
+            .WithArgs("server", "start-dev", "--namespace", "1")
+            .WithEnvironment("DB", "postgres12")
+            .WithEnvironment("DBNAME", postgresDb.Resource.DatabaseName)
+            .WithEnvironment("DB_PORT", postgresDb.Resource.Parent.PrimaryEndpoint.TargetPort?.ToString() ?? "5432")
+            .WithEnvironment("POSTGRES_USER", postgresDb.Resource.Parent.UserNameParameter?.Value ?? "postgres")
+            .WithEnvironment("POSTGRES_PWD", postgresDb.Resource.Parent.PasswordParameter.Value)
+            .WithEnvironment("POSTGRES_SEEDS", "postgres")
+            .WithEnvironment("TEMPORAL_ADDRESS", "temporal:7233")
+            .WithEnvironment("TEMPORAL_CLI_ADDRESS", "temporal:7233")
+            .WaitFor(postgresDb);
+    }
+    
     public static IResourceBuilder<T> AddSwaggerUiCommand<T>(this IResourceBuilder<T> resource) 
         where T: IResourceWithEndpoints
     {
@@ -23,6 +44,8 @@ public static class ResourceBuilderExtensions
             {
                 try
                 {
+                    var a = resource.Resource.TryGetUrls(out var urls);
+                    
                     var endpoint = resource.GetEndpoint("http");
                     var url = $"{endpoint.Url}/swagger";
 

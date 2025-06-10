@@ -7,6 +7,7 @@ using Microsoft.Extensions.Logging;
 using OpenTelemetry;
 using OpenTelemetry.Metrics;
 using OpenTelemetry.Trace;
+using Temporalio.Extensions.OpenTelemetry;
 
 namespace WorkflowEval.ServiceDefaults;
 
@@ -61,6 +62,11 @@ public static class Extensions
             })
             .WithTracing(tracing =>
             {
+                tracing.AddSource(
+                        TracingInterceptor.ClientSource.Name,
+                        TracingInterceptor.WorkflowsSource.Name,
+                        TracingInterceptor.ActivitiesSource.Name);
+                
                 tracing.AddSource(builder.Environment.ApplicationName)
                     .AddAspNetCoreInstrumentation(tracing =>
                         // Exclude health check requests from tracing
@@ -68,8 +74,7 @@ public static class Extensions
                             !context.Request.Path.StartsWithSegments(HealthEndpointPath)
                             && !context.Request.Path.StartsWithSegments(AlivenessEndpointPath)
                     )
-                    // Uncomment the following line to enable gRPC instrumentation (requires the OpenTelemetry.Instrumentation.GrpcNetClient package)
-                    //.AddGrpcClientInstrumentation()
+                    .AddGrpcClientInstrumentation()
                     .AddHttpClientInstrumentation();
             });
 
