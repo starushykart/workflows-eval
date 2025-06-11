@@ -39,22 +39,19 @@ public static class ResourceBuilderExtensions
     {
         return resource.WithCommand(
             "swagger-ui-docs",
-            "Swagger UI",
-            async _ =>
+            "Swagger UI", _ =>
             {
                 try
                 {
-                    var a = resource.Resource.TryGetUrls(out var urls);
-                    
-                    var endpoint = resource.GetEndpoint("http");
+                    var endpoint = resource.Resource.GetEndpoint("http");
                     var url = $"{endpoint.Url}/swagger";
 
                     Process.Start(new ProcessStartInfo(url) { UseShellExecute = true });
-                    return new ExecuteCommandResult { Success = true };
+                    return Task.FromResult(new ExecuteCommandResult { Success = true });
                 }
                 catch (Exception ex)
                 {
-                    return new ExecuteCommandResult { Success = false, ErrorMessage = ex.ToString() };
+                    return Task.FromResult(new ExecuteCommandResult { Success = false, ErrorMessage = ex.ToString() });
                 }
             },
             new CommandOptions
