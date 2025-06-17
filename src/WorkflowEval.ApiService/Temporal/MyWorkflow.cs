@@ -33,17 +33,26 @@ public class MyWorkflow : IMyWorkflow
     [WorkflowRun]
     public async Task<string> RunAsync()
     {
-        // Run an async instance method activity.
-        var result1 = await Workflow.ExecuteActivityAsync(
-            (SomeActivities act) => act.FirstAsync(),
-            new ActivityOptions
-            {
-                RetryPolicy = new RetryPolicy
+        // error can be handled with a simple try/catch
+        string result1;
+        try
+        {
+            // Run an async instance method activity.
+            result1 = await Workflow.ExecuteActivityAsync(
+                (SomeActivities act) => act.FirstAsync(),
+                new ActivityOptions
                 {
-                    MaximumAttempts = 3
-                },
-                StartToCloseTimeout = TimeSpan.FromMinutes(5),
-            });
+                    RetryPolicy = new RetryPolicy
+                    {
+                        MaximumAttempts = 3
+                    },
+                    StartToCloseTimeout = TimeSpan.FromMinutes(5),
+                });
+        }
+        catch (Exception ex)
+        {
+            result1 = "default";
+        }
 
         Workflow.Logger.LogInformation("Activity instance method result: {Result}", result1);
 

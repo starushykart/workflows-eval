@@ -7,6 +7,7 @@ public class SomeActivities(ILogger<SomeActivities> logger)
     [Activity]
     public async Task<string> FirstAsync()
     {
+        //throw new Exception("my error");
         logger.LogInformation("{Activity} activity started", nameof(FirstAsync));
 
         await Task.Delay(TimeSpan.FromSeconds(30));
