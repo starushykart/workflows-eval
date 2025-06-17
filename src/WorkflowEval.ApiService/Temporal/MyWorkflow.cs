@@ -1,9 +1,9 @@
 using Temporalio.Common;
 using Temporalio.Workflows;
-using WorkflowEval.ApiService.Activities;
+using WorkflowEval.ApiService.Temporal.Activities;
 using Mutex = Temporalio.Workflows.Mutex;
 
-namespace WorkflowEval.ApiService;
+namespace WorkflowEval.ApiService.Temporal;
 
 [Workflow]
 public class MyWorkflow : IMyWorkflow

@@ -1,6 +1,6 @@
 using Temporalio.Activities;
 
-namespace WorkflowEval.ApiService.Activities;
+namespace WorkflowEval.ApiService.Temporal.Activities;
 
 public class SomeActivities(ILogger<SomeActivities> logger)
 {
