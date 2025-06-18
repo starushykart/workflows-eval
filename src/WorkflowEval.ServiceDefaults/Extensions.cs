@@ -1,3 +1,4 @@
+using MassTransit.Logging;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Diagnostics.HealthChecks;
 using Microsoft.Extensions.DependencyInjection;
@@ -63,9 +64,10 @@ public static class Extensions
             .WithTracing(tracing =>
             {
                 tracing.AddSource(
-                        TracingInterceptor.ClientSource.Name,
-                        TracingInterceptor.WorkflowsSource.Name,
-                        TracingInterceptor.ActivitiesSource.Name);
+                    TracingInterceptor.ClientSource.Name,
+                    TracingInterceptor.WorkflowsSource.Name,
+                    TracingInterceptor.ActivitiesSource.Name,
+                    DiagnosticHeaders.DefaultListenerName);
                 
                 tracing.AddSource(builder.Environment.ApplicationName)
                     .AddAspNetCoreInstrumentation(tracing =>
