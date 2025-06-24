@@ -12,5 +12,5 @@ public class MigrationHostedService(IServiceScopeFactory factory) : IHostedServi
     }
 
     public Task StopAsync(CancellationToken cancellationToken)
-    => Task.CompletedTask;
+        => Task.CompletedTask;
 }
